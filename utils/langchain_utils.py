@@ -1,3 +1,4 @@
+import os
 from dotenv import load_dotenv
 from utils.vllm_utils import VLLMCaller
 from typing import Optional, Tuple, Union
@@ -41,6 +42,15 @@ def universal_model_loader(
             model=model_name,
             max_retries=max_retries,
             **extra_kwargs
+        ), organization
+
+    # DeepSeek API (OpenAI-compatible endpoint); key read from DEEPSEEK_API_KEY
+    if organization == 'deepseek':
+        return ChatOpenAI(
+            model=model_name,
+            base_url=os.environ.get('DEEPSEEK_BASE_URL', 'https://api.deepseek.com'),
+            api_key=os.environ['DEEPSEEK_API_KEY'],
+            max_retries=max_retries
         ), organization
 
     # loading the models using bedrock

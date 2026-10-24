@@ -245,6 +245,21 @@ model_dictionary = {
         'quantization': None,
         'company': 'AllenAI'
     },
+    'olmo2-7b-sft': {
+        'model': 'allenai/OLMo-2-1124-7B-SFT',
+        'quantization': None,
+        'company': 'AllenAI'
+    },
+    'olmo2-7b-dpo': {
+        'model': 'allenai/OLMo-2-1124-7B-DPO',
+        'quantization': None,
+        'company': 'AllenAI'
+    },
+    'olmo2-7b-sft-lora-pilot': {
+        'model': 'training_output/olmo2-7b-sft-lora-pilot-merged',
+        'quantization': None,
+        'company': 'AllenAI'
+    },
     'olmo2-7b-instruct-pt': {
         'model': 'training_output/olmo2-7b-instruct-pt',
         'quantization': None,

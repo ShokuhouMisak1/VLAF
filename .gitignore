@@ -220,3 +220,6 @@ results/
 LlamaFactory/
 sad/script_runner_*
 script_runner_*
+
+# CSE 595 fork: local training outputs (merged LoRA models, adapters)
+training_output/
