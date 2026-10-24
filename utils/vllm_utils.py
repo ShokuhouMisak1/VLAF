@@ -260,6 +260,18 @@ model_dictionary = {
         'quantization': None,
         'company': 'AllenAI'
     },
+    # CSE 595 judge: MoE, 3B active; the official FP8 checkpoint (~37.5 GB) fits one A40.
+    # Text-only use, so skip the vision encoder's memory profiling.
+    'qwen3.6-35b-a3b-fp8': {
+        'model': 'Qwen/Qwen3.6-35B-A3B-FP8',
+        'quantization': 'fp8',
+        'company': 'Qwen',
+        'max_model_len': 16384,
+        'llm_kwargs': {
+            'gpu_memory_utilization': 0.92,
+            'limit_mm_per_prompt': {'image': 0, 'video': 0},
+        }
+    },
     'olmo2-7b-instruct-pt': {
         'model': 'training_output/olmo2-7b-instruct-pt',
         'quantization': None,
@@ -349,6 +361,8 @@ class VLLMCaller:
         extra_kwargs = {}
         if 'max_model_len' in model_info:
             extra_kwargs['max_model_len'] = model_info['max_model_len']
+        # any other vllm.LLM arguments a model entry needs (e.g. memory, modalities)
+        extra_kwargs.update(model_info.get('llm_kwargs', {}))
 
         # loading the model normally
         if not enable_steer_vector and not enable_lora:
