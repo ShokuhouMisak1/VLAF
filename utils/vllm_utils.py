@@ -270,6 +270,9 @@ model_dictionary = {
         'llm_kwargs': {
             'gpu_memory_utilization': 0.92,
             'limit_mm_per_prompt': {'image': 0, 'video': 0},
+            # Hybrid (Mamba-style) layers: one cache block per sequence, and only ~231
+            # fit on an A40 next to the weights. The judge sends 10 at a time anyway.
+            'max_num_seqs': 64,
         }
     },
     'olmo2-7b-instruct-pt': {
